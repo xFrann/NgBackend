@@ -1,11 +1,12 @@
-from django.urls import path, include, re_path
-from django.views.generic import TemplateView
+from django.urls import path, include
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('accounts/', include('accounts.urls')),
-    path('profiles/', include('user_profiles.urls'))
+    path('profiles/', include('user_profiles.urls')),
+    path('announcements/', include('announcements.urls')),
+    path('comments/', include('comments.urls')),
 ]
 
 # Catch all paths

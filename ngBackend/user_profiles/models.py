@@ -7,6 +7,7 @@ class UserProfile(models.Model):
     last_name = models.CharField(max_length=80, default='')
     phone = models.CharField(max_length=20, default='')
     city = models.CharField(max_length=20, default='')
+    picture = models.ImageField(upload_to="static/", default='static/profile.jpg')
 
     def __str__(self):
         return self.first_name

@@ -8,6 +8,6 @@ urlpatterns = [
     path('login', LoginView.as_view()),
     path('logout', LogoutView.as_view()),
     path('delete', DeleteAccountView.as_view()),
-    path('get_users', GetUsersView.as_view()),
+    path('get_users', GetUsersView.as_view({'get': 'list'})),
     path('get_user', GetUserView.as_view())
 ]

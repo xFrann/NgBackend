@@ -26,6 +26,6 @@ class UpdateUserProfileView(APIView):
         user = User.objects.get(id=user.id)
         UserProfile.objects.filter(user=user).update(first_name=first_name, last_name=last_name, phone=phone, city=city)
         user_profiles = UserProfile.objects.get(user=user)
-        user_profile = UserProfileSerializer(user_profile)
+        user_profile = UserProfileSerializer(user_profiles)
         return Response({'profile': user_profile.data, 'username': str(user.username)})
 

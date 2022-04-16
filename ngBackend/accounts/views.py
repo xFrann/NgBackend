@@ -1,17 +1,13 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
+from rest_framework.viewsets import ViewSet 
 from user_profiles.models import UserProfile
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
 from django.contrib import auth
 from .serializer import UserSerializer
-
-
-
-
 
 class CheckAuthenticatedView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -59,7 +55,6 @@ class LoginView(APIView):
 
     def post(self, request, format=None):
         data = self.request.data
-        print(data)
 
         username = data['username']
         password = data['password']
@@ -100,11 +95,9 @@ class DeleteAccountView(APIView):
             return Response({'error': 'Something went wrong when trying to delete the user'})
 
 
-class GetUsersView(APIView):
+class GetUsersView(ViewSet):
     permission_classes = (permissions.AllowAny, )
-
     def get(self, request, format=None):
         users = User.objects.all()
-
         users = UserSerializer(users, many=True)
         return Response(users.data)
