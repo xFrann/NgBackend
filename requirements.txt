@@ -2,3 +2,5 @@ django
 django-rest-framework
 psycopg2
 django-cors-headers
+Pillow
+drf-extensions
