@@ -8,7 +8,6 @@ from comments.urls import registerPath, registerNestedPath
 
 router = DefaultRouter()
 router.register(r'', GetAnnouncementsViewSet)
-registerPath(router)
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
     pass
 
