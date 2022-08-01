@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'user_profiles',
     'announcements',
-    'comments'
+    'comments',
+    'company',
 
 ]
 
@@ -152,3 +153,9 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','https://*.127.0.0.1']
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.frann.dev'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "#"
+EMAIL_HOST_PASSWORD = "#"
+EMAIL_USE_TLS = True
