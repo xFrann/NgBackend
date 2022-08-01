@@ -18,12 +18,14 @@ class GetUserProfileView(ViewSet):
         return Response({'profile': user_profile.data})
 
     def retrieve(self, request, username=None):
-        user = self.request.user
-        user = User.objects.filter(username__iexact=username).first()
-        user_profile = UserProfile.objects.get(user=user)
-        user_profile = UserProfileSerializer(user_profile)
-
-        return Response({'profile': user_profile.data, 'username': str(user.username)})
+        try:
+            user = self.request.user
+            user = User.objects.filter(username__iexact=username).first()
+            user_profile = UserProfile.objects.get(user=user)
+            user_profile = UserProfileSerializer(user_profile)
+            return Response(user_profile.data)
+        except: 
+            return Response({"error": "Could not retrieve user profile"})
 
 
 class UpdateUserProfileView(APIView):
