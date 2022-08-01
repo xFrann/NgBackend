@@ -1,13 +1,14 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404      
 from rest_framework import viewsets
 from announcements.models import Announcement
 from rest_framework.response import Response
 from announcements.serializers import AnnouncementSerializer
 from rest_framework_extensions.mixins import NestedViewSetMixin
+class GetAnnouncementsViewSet(NestedViewSetMixin, viewsets.ViewSet):
+    queryset = Announcement.objects.all()
+    serializer_class = AnnouncementSerializer
 
-class CreateAnnoucementView(APIView):
-    def post(self, request, format=None):
+    def create(self, request):
         data = self.request.data
         user = self.request.user
         try:
@@ -18,12 +19,9 @@ class CreateAnnoucementView(APIView):
         except KeyError:
             return Response({"error": "Please provide values for title and content"})
 
-class GetAnnouncementsViewSet(NestedViewSetMixin, viewsets.ViewSet):
-    queryset = Announcement.objects.all()
-    serializer_class = AnnouncementSerializer
-
     def list(self, request):
         serialize = AnnouncementSerializer(self.queryset, many=True)
+        print(serialize.data)
         return Response(serialize.data)
 
     def retrieve(self, request, pk=None):
