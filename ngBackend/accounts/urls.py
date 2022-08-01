@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import GetEmailExists, GetUserExists, GetUserView, SignupView, GetCSRFToken, LoginView, LogoutView, CheckAuthenticatedView, DeleteAccountView, GetUsersView, GetInviteCodePost
+from .views import GetEmailExists, GetUserExists, GetUserView, SendTestEmail, SignupView, GetCSRFToken, LoginView, LogoutView, CheckAuthenticatedView, DeleteAccountView, GetUsersView, GetInviteCodePost
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -17,4 +17,5 @@ urlpatterns = [
     path('code', GetInviteCodePost.as_view()),
     path('user_exists', GetUserExists.as_view()),
     path('email_exists', GetEmailExists.as_view()),
+    path('sendmail', SendTestEmail.as_view()),
 ]
