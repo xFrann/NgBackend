@@ -1,3 +1,4 @@
+from math import perm
 from django.contrib.auth.models import User
 from django.forms import ValidationError
 from rest_framework.views import APIView
@@ -12,6 +13,7 @@ from django.contrib import auth
 from .serializer import UserSerializer
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.core.validators import validate_email
+from django.core.mail import send_mail
 class CheckAuthenticatedView(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request, format=None):
@@ -177,3 +179,9 @@ class GetEmailExists(APIView):
                 return Response({'error': 'Email does not exist'})
         except:
             return Response({'error': 'Internal error when trying to verify email'}, status=500)
+
+class SendTestEmail(APIView):
+    permission_classes = (permissions.AllowAny, )
+    
+    def post(self, request, format=None):
+        send_mail('Test Email', 'This is a test email', 'contact@frann.dev', ['frangumada@gmail.com'], fail_silently=False,)
