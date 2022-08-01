@@ -1,4 +1,5 @@
 from rest_framework import serializers
+import announcements
 from announcements.models import Announcement
 from comments.models import Comment
 
